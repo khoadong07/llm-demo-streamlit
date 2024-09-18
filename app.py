@@ -50,10 +50,12 @@ if st.button('Run'):
         st.write(f"Processing time: {processing_time:.2f} seconds")
         st.write(f"Input token: {input_token} tokens")
         st.write(f"Output token: {output_token} tokens")
+        st.json(result_llm)
         if isinstance(result_llm, list) and len(result_llm) > 0:
             result_llm = result_llm[0]
 
         if isinstance(result_llm, dict):
+
             data = {
                 "Field": [normalize_field_name(k) for k in result_llm.keys()],
                 "Value": [str(v) for v in result_llm.values()]
@@ -62,6 +64,5 @@ if st.button('Run'):
             df = pd.DataFrame(data)
             st.table(df)
 
-            st.json(result_llm)
         else:
             st.error("Unexpected result format.")

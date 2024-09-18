@@ -28,11 +28,9 @@ def call_deep_infra(raw_content):
           "role": "user",
           "content": load_prompt_file("prompt.txt")
         },
-
           {
               "role": "user",
-              "content": f"With the provided knowledge, please process the following content {raw_content}. The result should be formatted as JSON with field names and corresponding values."
-          }
+              "content": f"Return only in JSON format. Using the provided knowledge, please process the following content: {raw_content}. The result must be formatted as JSON with corresponding field names and values. If the returned result is not in the correct JSON format, it must be reformatted to ensure it is always correct."}
       ])
 
     result_llm = chat_completion.choices[0].message.content
@@ -46,9 +44,17 @@ def call_deep_infra(raw_content):
 
 def parse_custom_json_string(custom_string):
     try:
-        json_data = re.search(r'```(.*?)```', custom_string, re.DOTALL).group(1).strip()
+        match = re.search(r'```json(.*?)```', custom_string, re.DOTALL)
+        if not match:
+            return {"error": "No JSON content found"}
+
+        json_data = match.group(1).strip()
+
         parsed_result = json.loads(json_data)
         return parsed_result
-    except (json.JSONDecodeError, AttributeError) as e:
-        return f"Failed to parse JSON: {e}"
 
+    except json.JSONDecodeError:
+        return {"error": "Failed to parse JSON, reformatting required"}
+
+    except AttributeError:
+        return {"error": "No valid JSON structure found"}
