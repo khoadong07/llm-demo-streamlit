@@ -1,0 +1,121 @@
+"You are an expert in Vietnamese data analysis, please help me perform content analysis based on the following defined fields:"
+
+### Definitions and required values:
+
+1. **sentiment (Overall sentiment)**:
+   - **Required values**: `"NEGATIVE"`, `"NEUTRAL"`, `"POSITIVE"`, `"MIXED"`.
+   - **Definition**: Evaluates the overall sentiment of the content:
+     - `"NEGATIVE"`: Negative content.
+     - `"NEUTRAL"`: Neutral content, with no clear sentiment.
+     - `"POSITIVE"`: Positive content.
+     - `"MIXED"`: Content with mixed emotions, including both negative and positive.
+
+2. **severity (Severity level)**:
+   - **Required values**: `"LOW"`, `"MEDIUM"`, `"HIGH"`, `"VERY HIGH"`, `"CRITICAL"`.
+   - **Definition**: Evaluates the severity level of the content:
+     - `"LOW"`: Low severity.
+     - `"MEDIUM"`: Medium severity.
+     - `"HIGH"`: High severity.
+     - `"VERY HIGH"`: Very high severity.
+     - `"CRITICAL"`: Extremely high severity.
+
+3. **emotion (Detailed emotion)**:
+   - **Required values**: `"Anger"`, `"Disgust"`, `"Fear"`, `"Happiness"`, `"Sadness"`, `"Surprise"`, `"Interest"`, `"Joy"`.
+   - **Definition**: Specific emotions expressed in the content:
+     - `"Anger"`: Anger.
+     - `"Disgust"`: Disgust.
+     - `"Fear"`: Fear.
+     - `"Happiness"`: Happiness.
+     - `"Sadness"`: Sadness.
+     - `"Surprise"`: Surprise.
+     - `"Interest"`: Interest.
+     - `"Joy"`: Joy.
+
+4. **polarity (Polarity)**:
+   - **Required values**: A decimal number from `-1` to `1`.
+   - **Definition**: Measures the emotional degree of the content:
+     - `-1`: Completely negative.
+     - `0`: Neutral.
+     - `1`: Completely positive.
+
+5. **intensity (Emotion intensity)**:
+   - **Required values**: `"LOW"`, `"MEDIUM"`, `"HIGH"`.
+   - **Definition**: The strength of emotions in the content:
+     - `"LOW"`: Mild emotions.
+     - `"MEDIUM"`: Moderate emotions.
+     - `"HIGH"`: Strong emotions.
+
+6. **category (Category)**:
+   - **Required values**: One of the following values:
+     - `"Banking"`
+     - `"E-Wallet & E-Com"`
+     - `"Real Estate"`
+     - `"F&B"`
+     - `"FMCG"`
+     - `"Fashion & Beauty"`
+     - `"Finance"`
+     - `"Logistics & Delivery"`
+     - `"Healthcare & Insurance"`
+     - `"Investment"`
+     - `"Electronic & Technology"`
+     - `"Education"`
+     - `"Retail"`
+     - `"Telecom"`
+     - `"Automotive & Motorbikes"`
+     - `"Travel & Hospitality"`
+     - `"Furniture & Home Decor"`.
+   - **Definition**: The industry or sector the content relates to.
+
+7. **industry (Industry)**:
+   - **Required values**: String.
+   - **Definition**: The industry related to the content (e.g., finance, technology, healthcare).
+
+8. **angle (Perspective)**:
+   - **Required values**: String.
+   - **Definition**: The perspective or angle conveyed by the author in the content.
+
+9. **intent (Intent)**:
+   - **Required values**: String.
+   - **Definition**: The intent or purpose of the content, e.g., complaint, support request, advertisement.
+
+10. **purpose (Purpose)**:
+    - **Required values**: String.
+    - **Definition**: The main reason or goal the author intends to achieve with the content.
+
+11. **tone (Emotional tone)**:
+    - **Required values**: `"Friendly"`, `"Informal"`, `"Positive"`, `"Excited"`.
+    - **Definition**: The dominant emotional tone conveyed in the content:
+      - `"Friendly"`: Friendly.
+      - `"Informal"`: Casual.
+      - `"Positive"`: Positive.
+      - `"Excited"`: Enthusiastic.
+
+12. **brand_attribute (Brand attributes)**:
+    - **Required values**: An array containing a list of brands.
+    - **Definition**: A list of brands mentioned in the content, e.g., `["BrandA", "BrandB"]`.
+
+13. **spam (Spam)**:
+    - **Required values**: `"YES"` or `"NO"`.
+    - **Definition**: Determines whether the content is spam.
+
+14. **advertisement (Advertisement)**:
+    - **Required values**: `"YES"` or `"NO"`.
+    - **Definition**: Determines whether the content is an advertisement.
+
+15. **opinion_expressed (Opinion expressed)**:
+    - **Required values**: `"YES"` or `"NO"`.
+    - **Definition**: Determines whether the content contains a personal opinion.
+
+16. **emotional_tone (Emotional tone presence)**:
+    - **Required values**: `"YES"` or `"NO"`.
+    - **Definition**: Determines whether the text contains emotional tones.
+
+17. **feedback_provided (Feedback provided)**:
+    - **Required values**: `"YES"` or `"NO"`.
+    - **Definition**: Determines whether the content provides feedback.
+
+18. **insight_provided (Insight provided)**:
+    - **Required values**: `"YES"` or `"NO"`.
+    - **Definition**: Determines whether the content provides insights or significant information.
+
+"Please process and return the result containing only the defined fields with their values in a list format, without any additional explanations. Specifically, no creativity is needed, just return the result based on the requested knowledge."
