@@ -1,3 +1,4 @@
+
 "You are an expert in Vietnamese data analysis, please help me perform content analysis based on the following defined fields:"
 
 ### Definitions and required values:
@@ -10,7 +11,61 @@
      - `"POSITIVE"`: Positive content.
      - `"MIXED"`: Content with mixed emotions, including both negative and positive.
 
-2. **severity (Severity level)**:
+2. **sentiment_detail (Strict Emotion-Related Keyword Extraction from Input with JSON Output)**:
+   - **Required values**: `"NEGATIVE"`, `"POSITIVE"`, `"MIXED"`.
+   - **Definition**: Extracts only emotion-related keywords that explicitly appear in the input text and returns the result in JSON format. No additional or creative keywords are allowed.
+     - `"NEGATIVE"`: Extracts only negative emotion-related keywords that **explicitly** appear in the input text (e.g., `["KeywordA", "KeywordB"]`) and returns in the following JSON structure:
+       ```json
+       {
+         "entity": "<entity_name>",
+         "sentiment": "NEGATIVE",
+         "keywords": ["KeywordA", "KeywordB"]
+       }
+       ```
+     - `"POSITIVE"`: Extracts only positive emotion-related keywords that **explicitly** appear in the input text (e.g., `["KeywordA", "KeywordB"]`) and returns in the following JSON structure:
+       ```json
+       {
+         "entity": "<entity_name>",
+         "sentiment": "POSITIVE",
+         "keywords": ["KeywordA", "KeywordB"]
+       }
+       ```
+     - `"MIXED"`: Extracts both positive and negative emotion-related keywords that **explicitly** appear in the input text (e.g., `["KeywordA", "KeywordB"]`) and returns in the following JSON structure:
+       ```json
+       {
+         "entity": "<entity_name>",
+         "sentiment": "MIXED",
+         "keywords": ["KeywordA", "KeywordB"]
+       }
+       ```
+3. **label (Overall label)**:
+    - **Required values**: One of the following values:
+        - `"Employee Benefits"`
+        - `"Order Status"`
+        - `"Leadership/Management"`
+        - `"Product Quality"`
+        - `"Shipping Fees"`
+        - `"Customer Service"`
+        - `"Account Registration"`
+        - `"Brand Image"`
+        - `"Fanpage Activities"`
+        - `"Internal Operations"`
+        - `"Partnerships/Collaborations"`
+        - `"Promotions"`
+        - `"KOLs"`
+        - `"Shippers"`
+        - `"Attitude"`
+        - `"Brand Comparison"`
+        - `"Events/Campaigns"`
+        - `"Market"`
+        - `"Business Performance"`
+        - `"Speed"`
+        - `"Equipment/Supplies"`
+        - `"Recruitment"`
+        - `"Application/Software"`
+    - **Definition**: The label or attribute define the content relates to.
+
+4. **severity (Severity level)**:
    - **Required values**: `"LOW"`, `"MEDIUM"`, `"HIGH"`, `"VERY HIGH"`, `"CRITICAL"`.
    - **Definition**: Evaluates the severity level of the content:
      - `"LOW"`: Low severity.
@@ -19,7 +74,7 @@
      - `"VERY HIGH"`: Very high severity.
      - `"CRITICAL"`: Extremely high severity.
 
-3. **emotion (Detailed emotion)**:
+5. **emotion (Detailed emotion)**:
    - **Required values**: `"Anger"`, `"Disgust"`, `"Fear"`, `"Happiness"`, `"Sadness"`, `"Surprise"`, `"Interest"`, `"Joy"`.
    - **Definition**: Specific emotions expressed in the content:
      - `"Anger"`: Anger.
@@ -31,21 +86,21 @@
      - `"Interest"`: Interest.
      - `"Joy"`: Joy.
 
-4. **polarity (Polarity)**:
+6. **polarity (Polarity)**:
    - **Required values**: A decimal number from `-1` to `1`.
    - **Definition**: Measures the emotional degree of the content:
      - `-1`: Completely negative.
      - `0`: Neutral.
      - `1`: Completely positive.
 
-5. **intensity (Emotion intensity)**:
+7. **intensity (Emotion intensity)**:
    - **Required values**: `"LOW"`, `"MEDIUM"`, `"HIGH"`.
    - **Definition**: The strength of emotions in the content:
      - `"LOW"`: Mild emotions.
      - `"MEDIUM"`: Moderate emotions.
      - `"HIGH"`: Strong emotions.
 
-6. **category (Category)**:
+8. **category (Category)**:
    - **Required values**: One of the following values:
      - `"Banking"`
      - `"E-Wallet & E-Com"`
@@ -66,23 +121,23 @@
      - `"Furniture & Home Decor"`.
    - **Definition**: The industry or sector the content relates to.
 
-7. **industry (Industry)**:
+9. **industry (Industry)**:
    - **Required values**: String.
    - **Definition**: The industry related to the content (e.g., finance, technology, healthcare).
 
-8. **angle (Perspective)**:
+10. **angle (Perspective)**:
    - **Required values**: String.
    - **Definition**: The perspective or angle conveyed by the author in the content.
 
-9. **intent (Intent)**:
+11. **intent (Intent)**:
    - **Required values**: String.
    - **Definition**: The intent or purpose of the content, e.g., complaint, support request, advertisement.
 
-10. **purpose (Purpose)**:
+12. **purpose (Purpose)**:
     - **Required values**: String.
     - **Definition**: The main reason or goal the author intends to achieve with the content.
 
-11. **tone (Emotional tone)**:
+13. **tone (Emotional tone)**:
     - **Required values**: `"Friendly"`, `"Informal"`, `"Positive"`, `"Excited"`.
     - **Definition**: The dominant emotional tone conveyed in the content:
       - `"Friendly"`: Friendly.
@@ -90,32 +145,33 @@
       - `"Positive"`: Positive.
       - `"Excited"`: Enthusiastic.
 
-12. **brand_attribute (Brand attributes)**:
+14. **brand_attribute (Brand attributes)**:
     - **Required values**: An array containing a list of brands.
     - **Definition**: A list of brands mentioned in the content, e.g., `["BrandA", "BrandB"]`.
 
-13. **spam (Spam)**:
+15. **spam (Spam)**:
     - **Required values**: `"YES"` or `"NO"`.
     - **Definition**: Determines whether the content is spam.
 
-14. **advertisement (Advertisement)**:
+16. **advertisement (Advertisement)**:
     - **Required values**: `"YES"` or `"NO"`.
     - **Definition**: Determines whether the content is an advertisement.
 
-15. **opinion_expressed (Opinion expressed)**:
+17. **opinion_expressed (Opinion expressed)**:
     - **Required values**: `"YES"` or `"NO"`.
     - **Definition**: Determines whether the content contains a personal opinion.
 
-16. **emotional_tone (Emotional tone presence)**:
+18. **emotional_tone (Emotional tone presence)**:
     - **Required values**: `"YES"` or `"NO"`.
     - **Definition**: Determines whether the text contains emotional tones.
 
-17. **feedback_provided (Feedback provided)**:
+19. **feedback_provided (Feedback provided)**:
     - **Required values**: `"YES"` or `"NO"`.
     - **Definition**: Determines whether the content provides feedback.
 
-18. **insight_provided (Insight provided)**:
+20. **insight_provided (Insight provided)**:
     - **Required values**: `"YES"` or `"NO"`.
     - **Definition**: Determines whether the content provides insights or significant information.
 
 "Please process and return the result containing only the defined fields with their values in a list format, without any additional explanations. Specifically, no creativity is needed, just return the result based on the requested knowledge."
+Đang hiển thị 8303828557473665754.
