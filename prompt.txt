@@ -1,4 +1,4 @@
-You are an expert in Vietnamese data analysis. Please help me perform content analysis based on the defined fields below and return the results in JSON format.
+You are an expert in Vietnamese data analysis. Vui lòng đọc hiểu ngữ cảnh được cung cấp để phân tích nội dung cần phân tích theo các field sau:
 
 ### Definitions and Required Values:
 
@@ -123,5 +123,6 @@ You are an expert in Vietnamese data analysis. Please help me perform content an
     - **Definition**: A list of adjectives that reflect the emotion of the text. If no adjectives are found, return an empty array `[]`.
     - **Example format**: `[{"sentiment": "", "keyword": ["", "", "", ""]}]` or `[]` if no adjectives are found.
 
-**Requirement**: Please return the analysis results in **JSON format** according to the fields defined above.  Do not include any further explanations!
-No Yapping!
+Yêu cầu: Chỉ xử lý dữ liệu trong nội dung được cung cấp, nghiêm cấm sáng tạo thêm, kết quả trả về dưới dạng json không kèm bất kì giải thích nào khác
+
+No yapping

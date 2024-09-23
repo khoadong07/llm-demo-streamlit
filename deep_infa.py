@@ -22,7 +22,7 @@ def load_prompt_file(file_path):
 
 def call_deep_infra(raw_context, raw_content):
     chat_completion = openai.chat.completions.create(
-        model="meta-llama/Meta-Llama-3.1-8B-Instruct",
+        model="Qwen/Qwen2.5-72B-Instruct",
         messages=[
             {
                 "role": "user",
@@ -34,9 +34,11 @@ def call_deep_infra(raw_context, raw_content):
               }
       ])
 
-    result_llm = chat_completion.choices[0].message.content
+    result = chat_completion.choices[0].message.content
 
-    result_llm = parse_custom_json_string(result_llm)
+    result_llm = parse_custom_json_string(result)
+    if result_llm is None:
+        result_llm = extract_json_from_string(result)
     prompt_token = chat_completion.usage.prompt_tokens
     output_token = chat_completion.usage.completion_tokens
 

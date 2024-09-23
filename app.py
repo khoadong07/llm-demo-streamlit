@@ -61,14 +61,5 @@ if st.button('Run'):
         if isinstance(result_llm, list) and len(result_llm) > 0:
             result_llm = result_llm[0]
 
-        if isinstance(result_llm, dict):
-            # data = {
-            #     "Field": [normalize_field_name(k) for k in result_llm.keys()],
-            #     "Value": [str(v) for v in result_llm.values()]
-            # }
-
-            # df = pd.DataFrame(data)
-            # st.table(df)
-            st.json(result_llm)
-        else:
-            st.error("Unexpected result format.")
+        st.text(result_llm)
+        st.json(result_llm)
