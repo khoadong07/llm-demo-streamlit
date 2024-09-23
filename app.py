@@ -6,6 +6,8 @@ import pandas as pd
 from deep_infa import call_deep_infra
 
 def process_call_llm(context, content):
+    print(f"content here: {content}")
+    print(f"context here: {context}")
     result_llm, input_token, output_token = call_deep_infra(context, content)
     return result_llm, input_token, output_token
 

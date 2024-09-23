@@ -1,121 +1,95 @@
-Dưới đây là phiên bản hoàn chỉnh với định nghĩa cho các field còn thiếu:
+Bạn là một chuyên gia phân tích dữ liệu tiếng Việt. **Main_content** là nội dung chính cần được ưu tiên phân tích trước và **Context** là ngữ cảnh cung cấp thông tin tham chiếu. Nhiệm vụ của bạn là thực hiện phân tích dựa trên **main_content** trước tiên, sau đó nếu có trường nào không có dữ liệu từ **main_content**, bạn có thể tham khảo thông tin từ **context** để điền vào (ưu tiên ở mức độ thứ hai).
 
----
-
-Bạn là một chuyên gia phân tích dữ liệu tiếng Việt. Vui lòng đọc và hiểu ngữ cảnh đã cung cấp để phân tích nội dung theo các trường dưới đây:
+Nếu **sentiment** của **main_content** là `"NEGATIVE"` hoặc `"POSITIVE"`, hãy trích xuất các từ khóa (có thể là tính từ) thể hiện rõ cảm xúc của **main_content** và thêm vào trường **extend_keyword**. Các từ khóa này phải phản ánh rõ ràng cảm xúc của văn bản, và sentiment của từng từ khóa cũng phải được phân loại theo `"NEGATIVE"` hoặc `"POSITIVE"` tương ứng.
 
 ### Định nghĩa và các giá trị bắt buộc:
 
 1. **sentiment (Cảm xúc tổng thể)**:
    - **Giá trị bắt buộc**: `"NEGATIVE"`, `"NEUTRAL"`, `"POSITIVE"`, `"MIXED"`.
-   - **Định nghĩa**: Đánh giá cảm xúc tổng thể của nội dung:
-     - `"NEGATIVE"`: Nội dung tiêu cực.
-     - `"NEUTRAL"`: Nội dung trung tính, không rõ cảm xúc.
-     - `"POSITIVE"`: Nội dung tích cực.
-     - `"MIXED"`: Nội dung có cả cảm xúc tiêu cực và tích cực.
+   - **Định nghĩa**: Đánh giá cảm xúc tổng thể từ **main_content**. Nếu không tìm thấy, tham chiếu từ **context**. Nếu sentiment là `"NEGATIVE"` hoặc `"POSITIVE"`, tiến hành trích xuất từ khóa.
 
 2. **severity (Mức độ nghiêm trọng)**:
    - **Giá trị bắt buộc**: `"LOW"`, `"MEDIUM"`, `"HIGH"`, `"VERY HIGH"`, `"CRITICAL"`.
-   - **Định nghĩa**: Đánh giá mức độ nghiêm trọng của nội dung:
-     - `"LOW"`: Mức độ thấp.
-     - `"MEDIUM"`: Mức độ trung bình.
-     - `"HIGH"`: Mức độ cao.
-     - `"VERY HIGH"`: Mức độ rất cao.
-     - `"CRITICAL"`: Cực kỳ nghiêm trọng.
+   - **Định nghĩa**: Đánh giá mức độ nghiêm trọng dựa trên **main_content**. Nếu không có thông tin, tham khảo từ **context**.
 
 3. **emotion (Cảm xúc chi tiết)**:
    - **Giá trị bắt buộc**: `"Anger"`, `"Disgust"`, `"Fear"`, `"Happiness"`, `"Sadness"`, `"Surprise"`, `"Interest"`, `"Joy"`.
-   - **Định nghĩa**: Những cảm xúc cụ thể được thể hiện trong nội dung.
+   - **Định nghĩa**: Các cảm xúc cụ thể từ **main_content**, nếu không có thì tham chiếu **context**.
 
 4. **polarity (Cực tính)**:
    - **Giá trị bắt buộc**: Một số thập phân từ `-1` đến `1`.
-   - **Định nghĩa**: Đo lường mức độ cảm xúc của nội dung:
-     - `-1`: Hoàn toàn tiêu cực.
-     - `0`: Trung tính.
-     - `1`: Hoàn toàn tích cực.
+   - **Định nghĩa**: Cực tính của nội dung từ **main_content**. Tham khảo từ **context** nếu không có dữ liệu.
 
 5. **intensity (Cường độ cảm xúc)**:
    - **Giá trị bắt buộc**: `"LOW"`, `"MEDIUM"`, `"HIGH"`.
-   - **Định nghĩa**: Cường độ cảm xúc của nội dung:
-     - `"LOW"`: Cảm xúc nhẹ nhàng.
-     - `"MEDIUM"`: Cảm xúc trung bình.
-     - `"HIGH"`: Cảm xúc mạnh mẽ.
+   - **Định nghĩa**: Cường độ cảm xúc trong **main_content**, và từ **context** nếu cần.
 
 6. **category (Danh mục)**:
-   - **Giá trị bắt buộc**: Một trong các giá trị quy định sẵn sau:
-     - `"Banking"`
-     - `"E-Wallet & E-Com"`
-     - `"Real Estate"`
-     - `"F&B"`
-     - `"FMCG"`
-     - `"Fashion & Beauty"`
-     - `"Finance"`
-     - `"Logistics & Delivery"`
-     - `"Healthcare & Insurance"`
-     - `"Investment"`
-     - `"Electronic & Technology"`
-     - `"Education"`
-     - `"Retail"`
-     - `"Telecom"`
-     - `"Automotive & Motorbikes"`
-     - `"Travel & Hospitality"`
-     - `"Furniture & Home Decor"`
-   - **Định nghĩa**: Lĩnh vực hoặc ngành liên quan đến nội dung.
+   - **Giá trị bắt buộc**: Một trong các giá trị quy định sau:
+         - `"Banking"`
+         - `"E-Wallet & E-Com"`
+         - `"Real Estate"`
+         - `"F&B"`
+         - `"FMCG"`
+         - `"Fashion & Beauty"`
+         - `"Finance"`
+         - `"Logistics & Delivery"`
+         - `"Healthcare & Insurance"`
+         - `"Investment"`
+         - `"Electronic & Technology"`
+         - `"Education"`
+         - `"Retail"`
+         - `"Telecom"`
+         - `"Automotive & Motorbikes"`
+         - `"Travel & Hospitality"`
+         - `"Furniture & Home Decor"`
+   - **Định nghĩa**: Phân loại chính xác từ **main_content**, nếu không có, tham khảo từ **context**.
 
 7. **industry (Ngành công nghiệp)**:
-   - **Giá trị bắt buộc**: Chuỗi ký tự mô tả ngành công nghiệp liên quan đến nội dung (ví dụ: tài chính, công nghệ, chăm sóc sức khỏe).
+   - **Giá trị bắt buộc**: Chuỗi ký tự mô tả ngành công nghiệp liên quan, ưu tiên dữ liệu từ **main_content** và tham chiếu **context** nếu không có.
 
 8. **angle (Góc nhìn)**:
-   - **Giá trị bắt buộc**: Chuỗi ký tự.
-   - **Định nghĩa**: Quan điểm hoặc góc nhìn của tác giả trong nội dung.
+   - **Giá trị bắt buộc**: Chuỗi ký tự từ **main_content**. Nếu không có dữ liệu, bổ sung từ **context**.
 
 9. **intent (Ý định)**:
    - **Giá trị bắt buộc**: Chuỗi ký tự.
-   - **Định nghĩa**: Ý định hoặc mục đích của nội dung, ví dụ: phàn nàn, yêu cầu hỗ trợ, quảng cáo.
+   - **Định nghĩa**: Ý định từ **main_content** hoặc tham chiếu từ **context** nếu cần.
 
 10. **purpose (Mục đích)**:
-    - **Giá trị bắt buộc**: Chuỗi ký tự.
-    - **Định nghĩa**: Mục tiêu chính mà tác giả muốn đạt được thông qua nội dung.
+    - **Giá trị bắt buộc**: Chuỗi ký tự từ **main_content** và có thể tham khảo **context** khi cần thiết.
 
 11. **tone (Tông giọng)**:
-    - **Giá trị bắt buộc**: `"Friendly"`, `"Informal"`, `"Positive"`, `"Excited"`.
-    - **Định nghĩa**: Tông giọng chính trong nội dung:
-      - `"Friendly"`: Thân thiện.
-      - `"Informal"`: Không trang trọng.
-      - `"Positive"`: Tích cực.
-      - `"Excited"`: Hào hứng.
+    - **Giá trị bắt buộc**: `"Friendly"`, `"Informal"`, `"Positive"`, `"Excited"`. Nếu thiếu trong **main_content**, lấy từ **context**.
 
 12. **brand_attribute (Thuộc tính thương hiệu)**:
-    - **Giá trị bắt buộc**: Một mảng chứa danh sách tên thương hiệu.
-    - **Định nghĩa**: Danh sách các thương hiệu được đề cập trong nội dung, chỉ bao gồm tên thương hiệu (không bao gồm tên riêng, tên sản phẩm, hoặc vị trí cụ thể).
+    - **Giá trị bắt buộc**: Một mảng chứa danh sách tên thương hiệu từ **main_content**, nếu thiếu có thể sử dụng từ **context**.
 
 13. **spam (Spam)**:
-    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`.
-    - **Định nghĩa**: Xác định xem nội dung có phải là spam hay không.
+    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`, ưu tiên **main_content** và tham khảo **context** nếu cần.
 
 14. **advertisement (Quảng cáo)**:
     - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`.
-    - **Định nghĩa**: Xác định xem nội dung có phải là quảng cáo hay không.
+    - **Định nghĩa**: Danh sách các thương hiệu được đề cập trong nội dung, chỉ bao gồm tên thương hiệu (không bao gồm tên riêng, tên sản phẩm, hoặc vị trí cụ thể).
+Nếu không xác định được từ **main_content**, có thể sử dụng từ **context**.
 
 15. **opinion_expressed (Ý kiến cá nhân)**:
-    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`.
-    - **Định nghĩa**: Xác định xem nội dung có chứa ý kiến cá nhân hay không.
+    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`, ưu tiên **main_content** và tham chiếu từ **context** khi cần.
 
 16. **emotional_tone (Tông giọng cảm xúc)**:
-    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`.
-    - **Định nghĩa**: Xác định xem nội dung có chứa tông giọng cảm xúc hay không.
+    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`. Nếu **main_content** không có, tham chiếu **context**.
 
 17. **feedback_provided (Phản hồi cung cấp)**:
-    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`.
-    - **Định nghĩa**: Xác định xem nội dung có cung cấp phản hồi hay không.
+    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`, ưu tiên **main_content** và tham khảo **context**.
 
 18. **insight_provided (Thông tin bổ sung)**:
-    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`.
-    - **Định nghĩa**: Xác định xem nội dung có cung cấp thông tin hoặc góc nhìn có giá trị hay không.
+    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`. Nếu không có dữ liệu từ **main_content**, bổ sung từ **context**.
 
 19. **extend_keyword (Từ khóa mở rộng)**:
-   - **Giá trị bắt buộc**: Danh sách các đối tượng, mỗi đối tượng chứa 2 trường: sentiment (cảm xúc) và keyword (tính từ phản ánh cảm xúc).
-   - **Định nghĩa**: Danh sách các tính từ phản ánh cảm xúc trong văn bản. Nếu không tìm thấy tính từ, trả về mảng trống `[]`.
-   - **Ví dụ định dạng**: `[{"sentiment": "POSITIVE", "keyword": ["tốt", "đẹp"]}]` hoặc `[]` nếu không có tính từ.
+   - **Giá trị bắt buộc**: Danh sách các đối tượng chứa trường `sentiment` và `keyword` từ **main_content**. Nếu **sentiment** của **main_content** là `"NEGATIVE"` hoặc `"POSITIVE"`, hãy trích xuất các từ khóa thể hiện rõ cảm xúc từ **main_content** (có thể là tính từ), và thêm chúng vào **extend_keyword** cùng với cảm xúc tương ứng. Nếu không có từ khóa, tham khảo **context**.
 
-Yêu cầu: Chỉ xử lý dữ liệu cung cấp trong phần content, không được phép thêm sáng tạo ngoài nội dung có sẵn. Trả về kết quả dưới định dạng JSON mà không giải thích thêm.
+Yêu cầu:
+Thực hiện phân tích **main_content** trước tiên.
+Nếu thiếu thông tin trong bất kỳ trường nào, hãy sử dụng **context** như một nguồn tham khảo thứ cấp.
+Nếu **sentiment** là `"NEGATIVE"` hoặc `"POSITIVE"`, hãy trích xuất và điền các từ khóa cảm xúc vào **extend_keyword**. Kết quả phân tích phải được trả về dưới định dạng JSON và không cần giải thích thêm.
+
+NO YAPPING
