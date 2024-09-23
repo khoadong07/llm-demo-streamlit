@@ -20,23 +20,22 @@ def load_prompt_file(file_path):
     with open(file_path, 'r') as file:
         return file.read()
 
-def call_deep_infra(raw_content):
+def call_deep_infra(raw_context, raw_content):
     chat_completion = openai.chat.completions.create(
         model="meta-llama/Meta-Llama-3.1-8B-Instruct",
         messages=[
-        {
-          "role": "user",
-          "content": load_prompt_file("prompt.txt")
-        },
-
-          {
-              "role": "user",
-              "content": f"With the provided knowledge, please process the following content {raw_content}. The result should be formatted as JSON with field names and corresponding values."
-          }
+            {
+                "role": "user",
+                "content": load_prompt_file("prompt.txt")
+            },
+              {
+                  "role": "user",
+                  "content": f"Dựa trên ngữ cảnh sau {raw_context} hãy phân tích nội dung {raw_content}. The result should be formatted as JSON with field names and corresponding values."
+              }
       ])
 
     result_llm = chat_completion.choices[0].message.content
-    print(result_llm)
+
     result_llm = parse_custom_json_string(result_llm)
     prompt_token = chat_completion.usage.prompt_tokens
     output_token = chat_completion.usage.completion_tokens
@@ -50,5 +49,21 @@ def parse_custom_json_string(custom_string):
         parsed_result = json.loads(json_data)
         return parsed_result
     except (json.JSONDecodeError, AttributeError) as e:
-        return f"Failed to parse JSON: {e}"
+        return None
 
+
+import json
+import re
+
+
+def extract_json_from_string(text):
+    json_pattern = r'\{[\s\S]*\}'
+    matches = re.findall(json_pattern, text, re.DOTALL)
+    if matches:
+        for match in matches:
+            try:
+                data = json.loads(match)
+                return data
+            except json.JSONDecodeError:
+                return None
+    return None

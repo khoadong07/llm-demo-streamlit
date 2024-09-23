@@ -1,15 +1,18 @@
+import json
+
 import streamlit as st
 import time
 import pandas as pd
 from deep_infa import call_deep_infra
 
-def process_call_llm(text):
-    result_llm, input_token, output_token = call_deep_infra(text)
+def process_call_llm(context, content):
+    result_llm, input_token, output_token = call_deep_infra(context, content)
     return result_llm, input_token, output_token
 
 def normalize_field_name(field):
     field_map = {
         "sentiment": "Sentiment",
+        "extend_keyword": "Extend Keyword",
         "severity": "Severity",
         "emotion": "Emotion",
         "polarity": "Polarity",
@@ -32,17 +35,22 @@ def normalize_field_name(field):
 
 st.title('LLM Demo API')
 
-input_text = st.text_area("Enter your text here:")
+context_text = st.text_area("Enter your context here:")
+input_text = st.text_area("Enter your content here:")
 
 if st.button('Run'):
     if input_text.strip() == "":
         st.warning("Please input some text before running.")
+
+    if context_text.strip() == "":
+        st.warning("Please input some text before running.")
+
     else:
         st.subheader("Analysis Result")
         with st.spinner('Processing...'):
             start_time = time.time()
 
-            result_llm, input_token, output_token = process_call_llm(input_text)
+            result_llm, input_token, output_token = process_call_llm(context=context_text, content=input_text)
 
             end_time = time.time()
             processing_time = end_time - start_time
@@ -54,14 +62,13 @@ if st.button('Run'):
             result_llm = result_llm[0]
 
         if isinstance(result_llm, dict):
-            data = {
-                "Field": [normalize_field_name(k) for k in result_llm.keys()],
-                "Value": [str(v) for v in result_llm.values()]
-            }
+            # data = {
+            #     "Field": [normalize_field_name(k) for k in result_llm.keys()],
+            #     "Value": [str(v) for v in result_llm.values()]
+            # }
 
-            df = pd.DataFrame(data)
-            st.table(df)
-
+            # df = pd.DataFrame(data)
+            # st.table(df)
             st.json(result_llm)
         else:
             st.error("Unexpected result format.")

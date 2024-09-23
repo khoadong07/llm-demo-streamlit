@@ -1,26 +1,26 @@
-"You are an expert in Vietnamese data analysis, please help me perform content analysis based on the following defined fields:"
+You are an expert in Vietnamese data analysis. Please help me perform content analysis based on the defined fields below and return the results in JSON format.
 
-### Definitions and required values:
+### Definitions and Required Values:
 
-1. **sentiment (Overall sentiment)**:
-   - **Required values**: `"NEGATIVE"`, `"NEUTRAL"`, `"POSITIVE"`, `"MIXED"`.
-   - **Definition**: Evaluates the overall sentiment of the content:
-     - `"NEGATIVE"`: Negative content.
-     - `"NEUTRAL"`: Neutral content, with no clear sentiment.
-     - `"POSITIVE"`: Positive content.
-     - `"MIXED"`: Content with mixed emotions, including both negative and positive.
+1. **sentiment (Overall Emotion)**:
+   - **Required Values**: `"NEGATIVE"`, `"NEUTRAL"`, `"POSITIVE"`, `"MIXED"`.
+   - **Definition**: Evaluates the overall emotion of the content:
+     - `"NEGATIVE"`: Content is negative.
+     - `"NEUTRAL"`: Content is neutral, not clear in emotion.
+     - `"POSITIVE"`: Content is positive.
+     - `"MIXED"`: Content has mixed emotions, including both negative and positive.
 
-2. **severity (Severity level)**:
-   - **Required values**: `"LOW"`, `"MEDIUM"`, `"HIGH"`, `"VERY HIGH"`, `"CRITICAL"`.
+2. **severity (Severity Level)**:
+   - **Required Values**: `"LOW"`, `"MEDIUM"`, `"HIGH"`, `"VERY HIGH"`, `"CRITICAL"`.
    - **Definition**: Evaluates the severity level of the content:
-     - `"LOW"`: Low severity.
-     - `"MEDIUM"`: Medium severity.
-     - `"HIGH"`: High severity.
-     - `"VERY HIGH"`: Very high severity.
-     - `"CRITICAL"`: Extremely high severity.
+     - `"LOW"`: Low level.
+     - `"MEDIUM"`: Medium level.
+     - `"HIGH"`: High level.
+     - `"VERY HIGH"`: Very high level.
+     - `"CRITICAL"`: Extremely severe.
 
-3. **emotion (Detailed emotion)**:
-   - **Required values**: `"Anger"`, `"Disgust"`, `"Fear"`, `"Happiness"`, `"Sadness"`, `"Surprise"`, `"Interest"`, `"Joy"`.
+3. **emotion (Detailed Emotion)**:
+   - **Required Values**: `"Anger"`, `"Disgust"`, `"Fear"`, `"Happiness"`, `"Sadness"`, `"Surprise"`, `"Interest"`, `"Joy"`.
    - **Definition**: Specific emotions expressed in the content:
      - `"Anger"`: Anger.
      - `"Disgust"`: Disgust.
@@ -32,21 +32,21 @@
      - `"Joy"`: Joy.
 
 4. **polarity (Polarity)**:
-   - **Required values**: A decimal number from `-1` to `1`.
+   - **Required Values**: A decimal number from `-1` to `1`.
    - **Definition**: Measures the emotional degree of the content:
      - `-1`: Completely negative.
      - `0`: Neutral.
      - `1`: Completely positive.
 
-5. **intensity (Emotion intensity)**:
-   - **Required values**: `"LOW"`, `"MEDIUM"`, `"HIGH"`.
+5. **intensity (Emotion Intensity)**:
+   - **Required Values**: `"LOW"`, `"MEDIUM"`, `"HIGH"`.
    - **Definition**: The strength of emotions in the content:
-     - `"LOW"`: Mild emotions.
-     - `"MEDIUM"`: Moderate emotions.
-     - `"HIGH"`: Strong emotions.
+     - `"LOW"`: Mild emotion.
+     - `"MEDIUM"`: Moderate emotion.
+     - `"HIGH"`: Strong emotion.
 
 6. **category (Category)**:
-   - **Required values**: One of the following values:
+   - **Required Values**: One of the following values:
      - `"Banking"`
      - `"E-Wallet & E-Com"`
      - `"Real Estate"`
@@ -63,59 +63,65 @@
      - `"Telecom"`
      - `"Automotive & Motorbikes"`
      - `"Travel & Hospitality"`
-     - `"Furniture & Home Decor"`.
-   - **Definition**: The industry or sector the content relates to.
+     - `"Furniture & Home Decor"`
+   - **Definition**: The industry or field that the content is related to.
 
 7. **industry (Industry)**:
-   - **Required values**: String.
+   - **Required Values**: String.
    - **Definition**: The industry related to the content (e.g., finance, technology, healthcare).
 
 8. **angle (Perspective)**:
-   - **Required values**: String.
-   - **Definition**: The perspective or angle conveyed by the author in the content.
+   - **Required Values**: String.
+   - **Definition**: The perspective or viewpoint expressed by the author in the content.
 
 9. **intent (Intent)**:
-   - **Required values**: String.
+   - **Required Values**: String.
    - **Definition**: The intent or purpose of the content, e.g., complaint, support request, advertisement.
 
 10. **purpose (Purpose)**:
-    - **Required values**: String.
-    - **Definition**: The main reason or goal the author intends to achieve with the content.
+    - **Required Values**: String.
+    - **Definition**: The main reason or goal that the author wants to achieve through the content.
 
-11. **tone (Emotional tone)**:
-    - **Required values**: `"Friendly"`, `"Informal"`, `"Positive"`, `"Excited"`.
-    - **Definition**: The dominant emotional tone conveyed in the content:
+11. **tone (Tone)**:
+    - **Required Values**: `"Friendly"`, `"Informal"`, `"Positive"`, `"Excited"`.
+    - **Definition**: The dominant tone in the content:
       - `"Friendly"`: Friendly.
-      - `"Informal"`: Casual.
+      - `"Informal"`: Informal.
       - `"Positive"`: Positive.
-      - `"Excited"`: Enthusiastic.
+      - `"Excited"`: Excited.
 
-12. **brand_attribute (Brand attributes)**:
-    - **Required values**: An array containing a list of brands.
+12. **brand_attribute (Brand Attributes)**:
+    - **Required Values**: An array containing a list of brands.
     - **Definition**: A list of brands mentioned in the content, e.g., `["BrandA", "BrandB"]`.
 
 13. **spam (Spam)**:
-    - **Required values**: `"YES"` or `"NO"`.
-    - **Definition**: Determines whether the content is spam.
+    - **Required Values**: `"YES"` or `"NO"`.
+    - **Definition**: Determine whether the content is spam.
 
 14. **advertisement (Advertisement)**:
-    - **Required values**: `"YES"` or `"NO"`.
-    - **Definition**: Determines whether the content is an advertisement.
+    - **Required Values**: `"YES"` or `"NO"`.
+    - **Definition**: Determine whether the content is an advertisement.
 
-15. **opinion_expressed (Opinion expressed)**:
-    - **Required values**: `"YES"` or `"NO"`.
-    - **Definition**: Determines whether the content contains a personal opinion.
+15. **opinion_expressed (Opinion Expressed)**:
+    - **Required Values**: `"YES"` or `"NO"`.
+    - **Definition**: Determine whether the content contains personal opinions.
 
-16. **emotional_tone (Emotional tone presence)**:
-    - **Required values**: `"YES"` or `"NO"`.
-    - **Definition**: Determines whether the text contains emotional tones.
+16. **emotional_tone (Emotional Tone)**:
+    - **Required Values**: `"YES"` or `"NO"`.
+    - **Definition**: Determine whether the content contains emotional tones.
 
-17. **feedback_provided (Feedback provided)**:
-    - **Required values**: `"YES"` or `"NO"`.
-    - **Definition**: Determines whether the content provides feedback.
+17. **feedback_provided (Feedback Provided)**:
+    - **Required Values**: `"YES"` or `"NO"`.
+    - **Definition**: Determine whether the content provides feedback.
 
-18. **insight_provided (Insight provided)**:
-    - **Required values**: `"YES"` or `"NO"`.
-    - **Definition**: Determines whether the content provides insights or significant information.
+18. **insight_provided (Insight Provided)**:
+    - **Required Values**: `"YES"` or `"NO"`.
+    - **Definition**: Determine whether the content provides significant information or insights.
 
-"Please process and return the result containing only the defined fields with their values in a list format, without any additional explanations. Specifically, no creativity is needed, just return the result based on the requested knowledge."
+19. **extend_keyword (Extended Keywords)**:
+    - **Required Values**: A list of objects containing sentiment and a list of adjectives.
+    - **Definition**: A list of adjectives that reflect the emotion of the text. If no adjectives are found, return an empty array `[]`.
+    - **Example format**: `[{"sentiment": "", "keyword": ["", "", "", ""]}]` or `[]` if no adjectives are found.
+
+**Requirement**: Please return the analysis results in **JSON format** according to the fields defined above.  Do not include any further explanations!
+No Yapping!
