@@ -1,52 +1,48 @@
-You are an expert in Vietnamese data analysis. Please read and understand the provided context to analyze the content according to the following fields:
+Dưới đây là phiên bản hoàn chỉnh với định nghĩa cho các field còn thiếu:
 
-### Definitions and Required Values:
+---
 
-1. **sentiment (Overall Emotion)**:
-   - **Required Values**: `"NEGATIVE"`, `"NEUTRAL"`, `"POSITIVE"`, `"MIXED"`.
-   - **Definition**: Evaluates the overall emotion of the content:
-     - `"NEGATIVE"`: Content is negative.
-     - `"NEUTRAL"`: Content is neutral, not clear in emotion.
-     - `"POSITIVE"`: Content is positive.
-     - `"MIXED"`: Content has mixed emotions, including both negative and positive.
+Bạn là một chuyên gia phân tích dữ liệu tiếng Việt. Vui lòng đọc và hiểu ngữ cảnh đã cung cấp để phân tích nội dung theo các trường dưới đây:
 
-2. **severity (Severity Level)**:
-   - **Required Values**: `"LOW"`, `"MEDIUM"`, `"HIGH"`, `"VERY HIGH"`, `"CRITICAL"`.
-   - **Definition**: Evaluates the severity level of the content:
-     - `"LOW"`: Low level.
-     - `"MEDIUM"`: Medium level.
-     - `"HIGH"`: High level.
-     - `"VERY HIGH"`: Very high level.
-     - `"CRITICAL"`: Extremely severe.
+### Định nghĩa và các giá trị bắt buộc:
 
-3. **emotion (Detailed Emotion)**:
-   - **Required Values**: `"Anger"`, `"Disgust"`, `"Fear"`, `"Happiness"`, `"Sadness"`, `"Surprise"`, `"Interest"`, `"Joy"`.
-   - **Definition**: Specific emotions expressed in the content:
-     - `"Anger"`: Anger.
-     - `"Disgust"`: Disgust.
-     - `"Fear"`: Fear.
-     - `"Happiness"`: Happiness.
-     - `"Sadness"`: Sadness.
-     - `"Surprise"`: Surprise.
-     - `"Interest"`: Interest.
-     - `"Joy"`: Joy.
+1. **sentiment (Cảm xúc tổng thể)**:
+   - **Giá trị bắt buộc**: `"NEGATIVE"`, `"NEUTRAL"`, `"POSITIVE"`, `"MIXED"`.
+   - **Định nghĩa**: Đánh giá cảm xúc tổng thể của nội dung:
+     - `"NEGATIVE"`: Nội dung tiêu cực.
+     - `"NEUTRAL"`: Nội dung trung tính, không rõ cảm xúc.
+     - `"POSITIVE"`: Nội dung tích cực.
+     - `"MIXED"`: Nội dung có cả cảm xúc tiêu cực và tích cực.
 
-4. **polarity (Polarity)**:
-   - **Required Values**: A decimal number from `-1` to `1`.
-   - **Definition**: Measures the emotional degree of the content:
-     - `-1`: Completely negative.
-     - `0`: Neutral.
-     - `1`: Completely positive.
+2. **severity (Mức độ nghiêm trọng)**:
+   - **Giá trị bắt buộc**: `"LOW"`, `"MEDIUM"`, `"HIGH"`, `"VERY HIGH"`, `"CRITICAL"`.
+   - **Định nghĩa**: Đánh giá mức độ nghiêm trọng của nội dung:
+     - `"LOW"`: Mức độ thấp.
+     - `"MEDIUM"`: Mức độ trung bình.
+     - `"HIGH"`: Mức độ cao.
+     - `"VERY HIGH"`: Mức độ rất cao.
+     - `"CRITICAL"`: Cực kỳ nghiêm trọng.
 
-5. **intensity (Emotion Intensity)**:
-   - **Required Values**: `"LOW"`, `"MEDIUM"`, `"HIGH"`.
-   - **Definition**: The strength of emotions in the content:
-     - `"LOW"`: Mild emotion.
-     - `"MEDIUM"`: Moderate emotion.
-     - `"HIGH"`: Strong emotion.
+3. **emotion (Cảm xúc chi tiết)**:
+   - **Giá trị bắt buộc**: `"Anger"`, `"Disgust"`, `"Fear"`, `"Happiness"`, `"Sadness"`, `"Surprise"`, `"Interest"`, `"Joy"`.
+   - **Định nghĩa**: Những cảm xúc cụ thể được thể hiện trong nội dung.
 
-6. **category (Category)**:
-   - **Required Values**: One of the following values:
+4. **polarity (Cực tính)**:
+   - **Giá trị bắt buộc**: Một số thập phân từ `-1` đến `1`.
+   - **Định nghĩa**: Đo lường mức độ cảm xúc của nội dung:
+     - `-1`: Hoàn toàn tiêu cực.
+     - `0`: Trung tính.
+     - `1`: Hoàn toàn tích cực.
+
+5. **intensity (Cường độ cảm xúc)**:
+   - **Giá trị bắt buộc**: `"LOW"`, `"MEDIUM"`, `"HIGH"`.
+   - **Định nghĩa**: Cường độ cảm xúc của nội dung:
+     - `"LOW"`: Cảm xúc nhẹ nhàng.
+     - `"MEDIUM"`: Cảm xúc trung bình.
+     - `"HIGH"`: Cảm xúc mạnh mẽ.
+
+6. **category (Danh mục)**:
+   - **Giá trị bắt buộc**: Một trong các giá trị quy định sẵn sau:
      - `"Banking"`
      - `"E-Wallet & E-Com"`
      - `"Real Estate"`
@@ -64,65 +60,62 @@ You are an expert in Vietnamese data analysis. Please read and understand the pr
      - `"Automotive & Motorbikes"`
      - `"Travel & Hospitality"`
      - `"Furniture & Home Decor"`
-   - **Definition**: The industry or field that the content is related to.
+   - **Định nghĩa**: Lĩnh vực hoặc ngành liên quan đến nội dung.
 
-7. **industry (Industry)**:
-   - **Required Values**: String.
-   - **Definition**: The industry related to the content (e.g., finance, technology, healthcare).
+7. **industry (Ngành công nghiệp)**:
+   - **Giá trị bắt buộc**: Chuỗi ký tự mô tả ngành công nghiệp liên quan đến nội dung (ví dụ: tài chính, công nghệ, chăm sóc sức khỏe).
 
-8. **angle (Perspective)**:
-   - **Required Values**: String.
-   - **Definition**: The perspective or viewpoint expressed by the author in the content.
+8. **angle (Góc nhìn)**:
+   - **Giá trị bắt buộc**: Chuỗi ký tự.
+   - **Định nghĩa**: Quan điểm hoặc góc nhìn của tác giả trong nội dung.
 
-9. **intent (Intent)**:
-   - **Required Values**: String.
-   - **Definition**: The intent or purpose of the content, e.g., complaint, support request, advertisement.
+9. **intent (Ý định)**:
+   - **Giá trị bắt buộc**: Chuỗi ký tự.
+   - **Định nghĩa**: Ý định hoặc mục đích của nội dung, ví dụ: phàn nàn, yêu cầu hỗ trợ, quảng cáo.
 
-10. **purpose (Purpose)**:
-    - **Required Values**: String.
-    - **Definition**: The main reason or goal that the author wants to achieve through the content.
+10. **purpose (Mục đích)**:
+    - **Giá trị bắt buộc**: Chuỗi ký tự.
+    - **Định nghĩa**: Mục tiêu chính mà tác giả muốn đạt được thông qua nội dung.
 
-11. **tone (Tone)**:
-    - **Required Values**: `"Friendly"`, `"Informal"`, `"Positive"`, `"Excited"`.
-    - **Definition**: The dominant tone in the content:
-      - `"Friendly"`: Friendly.
-      - `"Informal"`: Informal.
-      - `"Positive"`: Positive.
-      - `"Excited"`: Excited.
+11. **tone (Tông giọng)**:
+    - **Giá trị bắt buộc**: `"Friendly"`, `"Informal"`, `"Positive"`, `"Excited"`.
+    - **Định nghĩa**: Tông giọng chính trong nội dung:
+      - `"Friendly"`: Thân thiện.
+      - `"Informal"`: Không trang trọng.
+      - `"Positive"`: Tích cực.
+      - `"Excited"`: Hào hứng.
 
-12. **brand_attribute (Brand Attributes)**:
-    - **Required Values**: An array containing a list of brands, note that only brand names should be included, excluding personal names, product names, or specific locations.
-    - **Definition**: A list of brands mentioned in the content, e.g., `["BrandA", "BrandB"]`.
+12. **brand_attribute (Thuộc tính thương hiệu)**:
+    - **Giá trị bắt buộc**: Một mảng chứa danh sách tên thương hiệu.
+    - **Định nghĩa**: Danh sách các thương hiệu được đề cập trong nội dung, chỉ bao gồm tên thương hiệu (không bao gồm tên riêng, tên sản phẩm, hoặc vị trí cụ thể).
 
 13. **spam (Spam)**:
-    - **Required Values**: `"YES"` or `"NO"`.
-    - **Definition**: Determine whether the content is spam.
+    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`.
+    - **Định nghĩa**: Xác định xem nội dung có phải là spam hay không.
 
-14. **advertisement (Advertisement)**:
-    - **Required Values**: `"YES"` or `"NO"`.
-    - **Definition**: Determine whether the content is an advertisement.
+14. **advertisement (Quảng cáo)**:
+    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`.
+    - **Định nghĩa**: Xác định xem nội dung có phải là quảng cáo hay không.
 
-15. **opinion_expressed (Opinion Expressed)**:
-    - **Required Values**: `"YES"` or `"NO"`.
-    - **Definition**: Determine whether the content contains personal opinions.
+15. **opinion_expressed (Ý kiến cá nhân)**:
+    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`.
+    - **Định nghĩa**: Xác định xem nội dung có chứa ý kiến cá nhân hay không.
 
-16. **emotional_tone (Emotional Tone)**:
-    - **Required Values**: `"YES"` or `"NO"`.
-    - **Definition**: Determine whether the content contains emotional tones.
+16. **emotional_tone (Tông giọng cảm xúc)**:
+    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`.
+    - **Định nghĩa**: Xác định xem nội dung có chứa tông giọng cảm xúc hay không.
 
-17. **feedback_provided (Feedback Provided)**:
-    - **Required Values**: `"YES"` or `"NO"`.
-    - **Definition**: Determine whether the content provides feedback.
+17. **feedback_provided (Phản hồi cung cấp)**:
+    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`.
+    - **Định nghĩa**: Xác định xem nội dung có cung cấp phản hồi hay không.
 
-18. **insight_provided (Insight Provided)**:
-    - **Required Values**: `"YES"` or `"NO"`.
-    - **Definition**: Determine whether the content provides significant information or insights.
+18. **insight_provided (Thông tin bổ sung)**:
+    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`.
+    - **Định nghĩa**: Xác định xem nội dung có cung cấp thông tin hoặc góc nhìn có giá trị hay không.
 
-19. **extend_keyword (Extended Keywords)**:
-   - **Required Values**: A list of objects, each containing 2 fields: sentiment (with values `"NEGATIVE"`, `"POSITIVE"`, `"NEUTRAL"`) and keyword (adjectives reflecting emotions).
-   - **Definition**: A list of adjectives that reflect the emotion of the text. If no adjectives are found, return an empty array `[]`.
-   - **Example format**: `[{"sentiment": "", "keyword": ["", "", "", ""]}]` or `[]` if no adjectives are found.
+19. **extend_keyword (Từ khóa mở rộng)**:
+   - **Giá trị bắt buộc**: Danh sách các đối tượng, mỗi đối tượng chứa 2 trường: sentiment (cảm xúc) và keyword (tính từ phản ánh cảm xúc).
+   - **Định nghĩa**: Danh sách các tính từ phản ánh cảm xúc trong văn bản. Nếu không tìm thấy tính từ, trả về mảng trống `[]`.
+   - **Ví dụ định dạng**: `[{"sentiment": "POSITIVE", "keyword": ["tốt", "đẹp"]}]` hoặc `[]` nếu không có tính từ.
 
-Requirement: Only process the data provided in the content, no additional creativity is allowed. The result must be returned in JSON format without any further explanation.
-
-No yapping.
+Yêu cầu: Chỉ xử lý dữ liệu cung cấp trong phần content, không được phép thêm sáng tạo ngoài nội dung có sẵn. Trả về kết quả dưới định dạng JSON mà không giải thích thêm.

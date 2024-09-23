@@ -26,11 +26,15 @@ def call_deep_infra(raw_context, raw_content):
         messages=[
             {
                 "role": "user",
-                "content": f"Dựa trên ngữ cảnh sau {raw_context} hãy phân tích nội dung {raw_content}. The result should be formatted as JSON with field names and corresponding values."
+                "content": f"Bạn là một chuyên gia phân tích dữ liệu tiếng Việt. Hãy đọc hiểu ngữ cảnh sau {raw_context}"
             },
             {
                 "role": "user",
                 "content": load_prompt_file("prompt.txt")
+            },
+            {
+                "role": "user",
+                "content": f"Hãy phân tích dựa trên nội dung sau {raw_content}"
             }
       ])
 

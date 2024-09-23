@@ -63,4 +63,6 @@ if st.button('Run'):
         if result_llm:
             if result_llm.get("advertisement") == "YES" or result_llm.get("spam") == "YES":
                 result_llm["sentiment"] = "NEUTRAL"
+                result_llm["extend_keyword"] = []
+                result_llm["polarity"] = 0
         st.json(result_llm)
