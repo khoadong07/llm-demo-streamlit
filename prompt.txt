@@ -65,12 +65,12 @@ Nếu **sentiment** của **main_content** là `"NEGATIVE"` hoặc `"POSITIVE"`,
     - **Giá trị bắt buộc**: Một mảng chứa danh sách tên thương hiệu từ **main_content**, nếu thiếu có thể sử dụng từ **context**.
 
 13. **spam (Spam)**:
-    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`, ưu tiên **main_content** và tham khảo **context** nếu cần.
+    - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`
+    - **Định nghĩa: Main content có chứa nội dung là spam hay không
 
 14. **advertisement (Quảng cáo)**:
     - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`.
-    - **Định nghĩa**: Danh sách các thương hiệu được đề cập trong nội dung, chỉ bao gồm tên thương hiệu (không bao gồm tên riêng, tên sản phẩm, hoặc vị trí cụ thể).
-Nếu không xác định được từ **main_content**, có thể sử dụng từ **context**.
+    - **Định nghĩa**: Main content có chưa quảng cáo hay không
 
 15. **opinion_expressed (Ý kiến cá nhân)**:
     - **Giá trị bắt buộc**: `"YES"` hoặc `"NO"`, ưu tiên **main_content** và tham chiếu từ **context** khi cần.
