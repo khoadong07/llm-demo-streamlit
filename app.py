@@ -60,6 +60,7 @@ if st.button('Run'):
         st.write(f"Output token: {output_token} tokens")
         if isinstance(result_llm, list) and len(result_llm) > 0:
             result_llm = result_llm[0]
-
-        st.text(result_llm)
+        if result_llm:
+            if result_llm.get("advertisement") == "YES" or result_llm.get("spam") == "YES":
+                result_llm["sentiment"] = "NEUTRAL"
         st.json(result_llm)

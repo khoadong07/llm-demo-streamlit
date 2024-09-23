@@ -22,16 +22,16 @@ def load_prompt_file(file_path):
 
 def call_deep_infra(raw_context, raw_content):
     chat_completion = openai.chat.completions.create(
-        model="Qwen/Qwen2.5-72B-Instruct",
+        model="meta-llama/Meta-Llama-3-70B-Instruct",
         messages=[
             {
                 "role": "user",
-                "content": load_prompt_file("prompt.txt")
+                "content": f"Dựa trên ngữ cảnh sau {raw_context} hãy phân tích nội dung {raw_content}. The result should be formatted as JSON with field names and corresponding values."
             },
-              {
-                  "role": "user",
-                  "content": f"Dựa trên ngữ cảnh sau {raw_context} hãy phân tích nội dung {raw_content}. The result should be formatted as JSON with field names and corresponding values."
-              }
+            {
+                "role": "user",
+                "content": load_prompt_file("prompt.txt")
+            }
       ])
 
     result = chat_completion.choices[0].message.content

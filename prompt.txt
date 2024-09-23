@@ -1,4 +1,4 @@
-You are an expert in Vietnamese data analysis. Vui lòng đọc hiểu ngữ cảnh được cung cấp để phân tích nội dung cần phân tích theo các field sau:
+You are an expert in Vietnamese data analysis. Please read and understand the provided context to analyze the content according to the following fields:
 
 ### Definitions and Required Values:
 
@@ -91,7 +91,7 @@ You are an expert in Vietnamese data analysis. Vui lòng đọc hiểu ngữ c�
       - `"Excited"`: Excited.
 
 12. **brand_attribute (Brand Attributes)**:
-    - **Required Values**: An array containing a list of brands.
+    - **Required Values**: An array containing a list of brands, note that only brand names should be included, excluding personal names, product names, or specific locations.
     - **Definition**: A list of brands mentioned in the content, e.g., `["BrandA", "BrandB"]`.
 
 13. **spam (Spam)**:
@@ -119,10 +119,10 @@ You are an expert in Vietnamese data analysis. Vui lòng đọc hiểu ngữ c�
     - **Definition**: Determine whether the content provides significant information or insights.
 
 19. **extend_keyword (Extended Keywords)**:
-    - **Required Values**: A list of objects containing sentiment and a list of adjectives.
-    - **Definition**: A list of adjectives that reflect the emotion of the text. If no adjectives are found, return an empty array `[]`.
-    - **Example format**: `[{"sentiment": "", "keyword": ["", "", "", ""]}]` or `[]` if no adjectives are found.
+   - **Required Values**: A list of objects, each containing 2 fields: sentiment (with values `"NEGATIVE"`, `"POSITIVE"`, `"NEUTRAL"`) and keyword (adjectives reflecting emotions).
+   - **Definition**: A list of adjectives that reflect the emotion of the text. If no adjectives are found, return an empty array `[]`.
+   - **Example format**: `[{"sentiment": "", "keyword": ["", "", "", ""]}]` or `[]` if no adjectives are found.
 
-Yêu cầu: Chỉ xử lý dữ liệu trong nội dung được cung cấp, nghiêm cấm sáng tạo thêm, kết quả trả về dưới dạng json không kèm bất kì giải thích nào khác
+Requirement: Only process the data provided in the content, no additional creativity is allowed. The result must be returned in JSON format without any further explanation.
 
-No yapping
+No yapping.
